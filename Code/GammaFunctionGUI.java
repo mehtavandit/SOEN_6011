@@ -1,24 +1,136 @@
-import javax.swing.*;
-import java.awt.*;
+/**
+ * This package contains the GUI application for calculating the Gamma function
+ * using Euler's method.
+ */
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.BorderFactory;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class GammaFunctionGUI {
+/**
+ * A GUI application for calculating the Gamma function using Euler's method.
+ */
+public final class GammaFunctionGUI {
 
-    public static double gamma(double x) {
+    /**
+     * Width of the welcome frame in pixels.
+     */
+    private static final int WELCOME_FRAME_WIDTH = 400;
+
+    /**
+     * Height of the welcome frame in pixels.
+     */
+    private static final int WELCOME_FRAME_HEIGHT = 200;
+
+    /**
+     * Width of the main frame in pixels.
+     */
+    private static final int MAIN_FRAME_WIDTH = 600;
+
+    /**
+     * Height of the main frame in pixels.
+     */
+    private static final int MAIN_FRAME_HEIGHT = 400;
+
+    /**
+     * Padding size for borders in pixels.
+     */
+    private static final int BORDER_PADDING = 20;
+
+    /**
+     * Font size for labels in points.
+     */
+    private static final int LABEL_FONT_SIZE = 16;
+
+    /**
+     * Number of rows in the result display area.
+     */
+    private static final int RESULT_AREA_ROWS = 10;
+
+    /**
+     * Number of columns in the result display area.
+     */
+    private static final int RESULT_AREA_COLUMNS = 30;
+
+    /**
+     * Number of columns in the text field.
+     */
+    private static final int TEXT_FIELD_COLUMNS = 20;
+
+    /**
+     * Color for the welcome button background.
+     */
+    private static final Color WELCOME_BUTTON_COLOR = new Color(70, 130, 180);
+
+    /**
+     * Color for the close button background.
+     */
+    private static final Color CLOSE_BUTTON_COLOR = new Color(178, 34, 34);
+
+    /**
+     * Background color for the panel.
+     */
+    private static final Color PANEL_BACKGROUND_COLOR = new Color(
+            245, 245, 245
+    );
+
+    /**
+     * Font size for the title label in points.
+     */
+    private static final int LABEL_TITLE_FONT_SIZE = 18;
+
+    /**
+     * Maximum number of iterations for the gamma function calculation.
+     */
+    private static final int MAX_ITERATIONS = 10000;
+
+    /**
+     * Size of insets in the grid bag layout.
+     */
+    private static final int INSETS_SIZE = 10;
+
+    /**
+     * Private constructor to prevent instantiation.
+     */
+    private GammaFunctionGUI() {
+        throw new UnsupportedOperationException(
+                "This is a utility class and cannot be instantiated"
+        );
+    }
+
+
+    /**
+     * Calculates the Gamma function using Euler's method.
+     *
+     * @param x the value to calculate the Gamma function for
+     * @return the calculated Gamma function value
+     * @throws IllegalArgumentException if x is less than or equal to 0
+     */
+    public static double gamma(final double x) {
         if (x <= 0.0) {
-            throw new IllegalArgumentException("Gamma function is not defined for non-positive numbers.");
+            throw new IllegalArgumentException(
+                    "Gamma function is not defined for non-positive numbers.");
         }
 
         double term;
         double product = 1.0;
         double oneOverX = 1.0 / x;
 
-        int maxIterations = 10000;
-
-        for (int n = 1; n <= maxIterations; n++) {
+        for (int n = 1; n <= MAX_ITERATIONS; n++) {
             term = Math.pow(1.0 + 1.0 / n, x) / (1.0 + x / n);
             product *= term;
         }
@@ -26,104 +138,136 @@ public class GammaFunctionGUI {
         return oneOverX * product;
     }
 
-    public static void main(String[] args) {
-        // Create the welcome frame
+    /**
+     * Main method to launch the Gamma function calculator GUI.
+     *
+     * @param args command-line arguments (not used)
+     */
+    public static void main(final String[] args) {
         JFrame welcomeFrame = new JFrame("Welcome");
         welcomeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        welcomeFrame.setSize(400, 200);
-        welcomeFrame.setLocationRelativeTo(null); // Center the frame
+        welcomeFrame.setSize(WELCOME_FRAME_WIDTH, WELCOME_FRAME_HEIGHT);
+        welcomeFrame.setLocationRelativeTo(null);
 
         JPanel welcomePanel = new JPanel();
         welcomePanel.setLayout(new BorderLayout());
-        welcomePanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        welcomePanel.setBorder(BorderFactory.createEmptyBorder(
+                BORDER_PADDING,
+                BORDER_PADDING,
+                BORDER_PADDING,
+                BORDER_PADDING
+        ));
 
-        JLabel welcomeLabel = new JLabel("Welcome to Gamma Calculator", JLabel.CENTER);
-        welcomeLabel.setFont(new Font("Serif", Font.BOLD, 18));
+
+        JLabel welcomeLabel = new JLabel(
+                "Welcome to Gamma Calculator", JLabel.CENTER);
+        welcomeLabel.setFont(new Font(
+                "Serif",
+                Font.BOLD,
+                LABEL_TITLE_FONT_SIZE
+        ));
+
         welcomePanel.add(welcomeLabel, BorderLayout.CENTER);
 
         JButton continueButton = new JButton("Continue");
-        continueButton.setFont(new Font("Serif", Font.PLAIN, 16));
-        continueButton.setBackground(new Color(70, 130, 180));
+        continueButton.setFont(new Font("Serif", Font.PLAIN, LABEL_FONT_SIZE));
+        continueButton.setBackground(WELCOME_BUTTON_COLOR);
         continueButton.setForeground(Color.WHITE);
         welcomePanel.add(continueButton, BorderLayout.SOUTH);
 
         welcomeFrame.add(welcomePanel);
         welcomeFrame.setVisible(true);
 
-        // Action listener for the continue button
         continueButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                welcomeFrame.dispose(); // Close the welcome frame
-                createMainFrame(); // Open the main frame
+            public void actionPerformed(final ActionEvent e) {
+                welcomeFrame.dispose();
+                createMainFrame();
             }
         });
     }
 
+    /**
+     * Creates and displays the main frame for the GUI.
+     */
     private static void createMainFrame() {
-        // Create the main frame
-        JFrame frame = new JFrame("Gamma Function Calculator using Euler's Method");
+        JFrame frame = new JFrame(
+                "Gamma Function Calculator using Euler's Method");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600, 400);
-        frame.setLocationRelativeTo(null); // Center the frame
+        frame.setSize(MAIN_FRAME_WIDTH, MAIN_FRAME_HEIGHT);
+        frame.setLocationRelativeTo(null);
 
-        // Create the input panel
         JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
-        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        panel.setBackground(new Color(245, 245, 245));
+        panel.setBorder(BorderFactory.createEmptyBorder(
+                BORDER_PADDING,
+                BORDER_PADDING,
+                BORDER_PADDING,
+                BORDER_PADDING
+        ));
+
+        panel.setBackground(PANEL_BACKGROUND_COLOR);
         frame.add(panel);
         placeComponents(panel);
 
-        // Display the frame
         frame.setVisible(true);
     }
 
-    private static void placeComponents(JPanel panel) {
+    /**
+     * Places the components on the panel for the Gamma function calculator GUI.
+     *
+     * @param panel the panel to place components on
+     */
+    private static void placeComponents(final JPanel panel) {
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.insets = new Insets(
+                INSETS_SIZE,
+                INSETS_SIZE,
+                INSETS_SIZE,
+                INSETS_SIZE
+        );
+
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Label for input
         JLabel userLabel = new JLabel("Enter a positive number:");
-        userLabel.setFont(new Font("Serif", Font.PLAIN, 16));
+        userLabel.setFont(new Font("Serif", Font.PLAIN, LABEL_FONT_SIZE));
         gbc.gridx = 0;
         gbc.gridy = 0;
         panel.add(userLabel, gbc);
 
-        // Text field for input
-        JTextField userText = new JTextField(20);
-        userText.setFont(new Font("Serif", Font.PLAIN, 16));
+        JTextField userText = new JTextField(TEXT_FIELD_COLUMNS);
+        userText.setFont(new Font("Serif", Font.PLAIN, LABEL_FONT_SIZE));
         gbc.gridx = 1;
         gbc.gridy = 0;
         panel.add(userText, gbc);
 
-        // Label for result
         JLabel resultLabel = new JLabel("Result:");
-        resultLabel.setFont(new Font("Serif", Font.PLAIN, 16));
+        resultLabel.setFont(new Font("Serif", Font.PLAIN, LABEL_FONT_SIZE));
         gbc.gridx = 0;
         gbc.gridy = 1;
         panel.add(resultLabel, gbc);
 
-        // Result display area with word wrap
-        JTextArea resultArea = new JTextArea(10, 30); // Increased rows and columns for larger area
-        resultArea.setFont(new Font("Serif", Font.PLAIN, 16));
+        JTextArea resultArea = new JTextArea(
+                RESULT_AREA_ROWS,
+                RESULT_AREA_COLUMNS
+        );
+
+        resultArea.setFont(new Font("Serif", Font.PLAIN, LABEL_FONT_SIZE));
         resultArea.setEditable(false);
-        resultArea.setLineWrap(true); // Enable line wrapping
-        resultArea.setWrapStyleWord(true); // Wrap on word boundaries
+        resultArea.setLineWrap(true);
+        resultArea.setWrapStyleWord(true);
         JScrollPane scrollPane = new JScrollPane(resultArea);
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.gridwidth = 2;
-        gbc.fill = GridBagConstraints.BOTH; // Allow the text area to expand
+        gbc.fill = GridBagConstraints.BOTH;
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
         panel.add(scrollPane, gbc);
 
-        // Calculate button
         JButton calculateButton = new JButton("Calculate");
-        calculateButton.setFont(new Font("Serif", Font.PLAIN, 16));
-        calculateButton.setBackground(new Color(70, 130, 180));
+        calculateButton.setFont(new Font("Serif", Font.PLAIN, LABEL_FONT_SIZE));
+        calculateButton.setBackground(WELCOME_BUTTON_COLOR);
         calculateButton.setForeground(Color.WHITE);
         gbc.gridx = 0;
         gbc.gridy = 2;
@@ -133,46 +277,44 @@ public class GammaFunctionGUI {
         gbc.fill = GridBagConstraints.NONE;
         panel.add(calculateButton, gbc);
 
-        // Close button
         JButton closeButton = new JButton("Close");
-        closeButton.setFont(new Font("Serif", Font.PLAIN, 16));
-        closeButton.setBackground(new Color(178, 34, 34));
+        closeButton.setFont(new Font("Serif", Font.PLAIN, LABEL_FONT_SIZE));
+        closeButton.setBackground(CLOSE_BUTTON_COLOR);
         closeButton.setForeground(Color.WHITE);
         gbc.gridx = 1;
         gbc.gridy = 2;
         panel.add(closeButton, gbc);
 
-        // Define the action to be performed for calculation
         ActionListener calculateAction = new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 String userInput = userText.getText();
                 try {
                     double x = Double.parseDouble(userInput);
                     double gammaValue = gamma(x);
                     resultArea.setText("Gamma(" + x + ") = " + gammaValue);
                 } catch (NumberFormatException ex) {
-                    resultArea.setText("Invalid input. Please enter a valid number.");
+                    resultArea.setText(
+                            "Invalid input. Please enter a valid number."
+                    );
+
                 } catch (IllegalArgumentException ex) {
                     resultArea.setText(ex.getMessage());
                 }
             }
         };
 
-        // Add action listener to the calculate button
         calculateButton.addActionListener(calculateAction);
 
-        // Add key listener to the text field for Enter key
         userText.addKeyListener(new KeyAdapter() {
-            public void keyPressed(KeyEvent e) {
+            public void keyPressed(final KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     calculateAction.actionPerformed(null);
                 }
             }
         });
 
-        // Add action listener to the close button
         closeButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 System.exit(0);
             }
         });
