@@ -23,7 +23,7 @@ This is a Java Swing GUI application for calculating the Gamma function using Eu
    cd gamma-function-calculator
 3. **Compile the Java Code:**
    ```bash
-  cd gamma-function-calculator
+   cd gamma-function-calculator
 4. **Run the Application:**
    ```bash
    java GammaFunctionGUI
