@@ -1,7 +1,3 @@
-/**
- * This package contains the GUI application for calculating the Gamma function
- * using Euler's method.
- */
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -10,13 +6,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.BorderFactory;
+import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -104,6 +101,11 @@ public final class GammaFunctionGUI {
     private static final int INSETS_SIZE = 10;
 
     /**
+     * Font family for all components.
+     */
+    private static final String FONT_FAMILY = "Serif";
+
+    /**
      * Private constructor to prevent instantiation.
      */
     private GammaFunctionGUI() {
@@ -111,7 +113,6 @@ public final class GammaFunctionGUI {
                 "This is a utility class and cannot be instantiated"
         );
     }
-
 
     /**
      * Calculates the Gamma function using Euler's method.
@@ -145,7 +146,7 @@ public final class GammaFunctionGUI {
      */
     public static void main(final String[] args) {
         JFrame welcomeFrame = new JFrame("Welcome");
-        welcomeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        welcomeFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         welcomeFrame.setSize(WELCOME_FRAME_WIDTH, WELCOME_FRAME_HEIGHT);
         welcomeFrame.setLocationRelativeTo(null);
 
@@ -158,11 +159,10 @@ public final class GammaFunctionGUI {
                 BORDER_PADDING
         ));
 
-
         JLabel welcomeLabel = new JLabel(
-                "Welcome to Gamma Calculator", JLabel.CENTER);
+                "Welcome to Gamma Calculator", SwingConstants.CENTER);
         welcomeLabel.setFont(new Font(
-                "Serif",
+                FONT_FAMILY,
                 Font.BOLD,
                 LABEL_TITLE_FONT_SIZE
         ));
@@ -170,7 +170,7 @@ public final class GammaFunctionGUI {
         welcomePanel.add(welcomeLabel, BorderLayout.CENTER);
 
         JButton continueButton = new JButton("Continue");
-        continueButton.setFont(new Font("Serif", Font.PLAIN, LABEL_FONT_SIZE));
+        continueButton.setFont(new Font(FONT_FAMILY, Font.PLAIN, LABEL_FONT_SIZE));
         continueButton.setBackground(WELCOME_BUTTON_COLOR);
         continueButton.setForeground(Color.WHITE);
         welcomePanel.add(continueButton, BorderLayout.SOUTH);
@@ -178,12 +178,9 @@ public final class GammaFunctionGUI {
         welcomeFrame.add(welcomePanel);
         welcomeFrame.setVisible(true);
 
-        continueButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                welcomeFrame.dispose();
-                createMainFrame();
-            }
+        continueButton.addActionListener(e -> {
+            welcomeFrame.dispose();
+            createMainFrame();
         });
     }
 
@@ -193,7 +190,7 @@ public final class GammaFunctionGUI {
     private static void createMainFrame() {
         JFrame frame = new JFrame(
                 "Gamma Function Calculator using Euler's Method");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(MAIN_FRAME_WIDTH, MAIN_FRAME_HEIGHT);
         frame.setLocationRelativeTo(null);
 
@@ -230,19 +227,19 @@ public final class GammaFunctionGUI {
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         JLabel userLabel = new JLabel("Enter a positive number:");
-        userLabel.setFont(new Font("Serif", Font.PLAIN, LABEL_FONT_SIZE));
+        userLabel.setFont(new Font(FONT_FAMILY, Font.PLAIN, LABEL_FONT_SIZE));
         gbc.gridx = 0;
         gbc.gridy = 0;
         panel.add(userLabel, gbc);
 
         JTextField userText = new JTextField(TEXT_FIELD_COLUMNS);
-        userText.setFont(new Font("Serif", Font.PLAIN, LABEL_FONT_SIZE));
+        userText.setFont(new Font(FONT_FAMILY, Font.PLAIN, LABEL_FONT_SIZE));
         gbc.gridx = 1;
         gbc.gridy = 0;
         panel.add(userText, gbc);
 
         JLabel resultLabel = new JLabel("Result:");
-        resultLabel.setFont(new Font("Serif", Font.PLAIN, LABEL_FONT_SIZE));
+        resultLabel.setFont(new Font(FONT_FAMILY, Font.PLAIN, LABEL_FONT_SIZE));
         gbc.gridx = 0;
         gbc.gridy = 1;
         panel.add(resultLabel, gbc);
@@ -252,7 +249,7 @@ public final class GammaFunctionGUI {
                 RESULT_AREA_COLUMNS
         );
 
-        resultArea.setFont(new Font("Serif", Font.PLAIN, LABEL_FONT_SIZE));
+        resultArea.setFont(new Font(FONT_FAMILY, Font.PLAIN, LABEL_FONT_SIZE));
         resultArea.setEditable(false);
         resultArea.setLineWrap(true);
         resultArea.setWrapStyleWord(true);
@@ -266,7 +263,7 @@ public final class GammaFunctionGUI {
         panel.add(scrollPane, gbc);
 
         JButton calculateButton = new JButton("Calculate");
-        calculateButton.setFont(new Font("Serif", Font.PLAIN, LABEL_FONT_SIZE));
+        calculateButton.setFont(new Font(FONT_FAMILY, Font.PLAIN, LABEL_FONT_SIZE));
         calculateButton.setBackground(WELCOME_BUTTON_COLOR);
         calculateButton.setForeground(Color.WHITE);
         gbc.gridx = 0;
@@ -278,34 +275,33 @@ public final class GammaFunctionGUI {
         panel.add(calculateButton, gbc);
 
         JButton closeButton = new JButton("Close");
-        closeButton.setFont(new Font("Serif", Font.PLAIN, LABEL_FONT_SIZE));
+        closeButton.setFont(new Font(FONT_FAMILY, Font.PLAIN, LABEL_FONT_SIZE));
         closeButton.setBackground(CLOSE_BUTTON_COLOR);
         closeButton.setForeground(Color.WHITE);
         gbc.gridx = 1;
         gbc.gridy = 2;
         panel.add(closeButton, gbc);
 
-        ActionListener calculateAction = new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
-                String userInput = userText.getText();
-                try {
-                    double x = Double.parseDouble(userInput);
-                    double gammaValue = gamma(x);
-                    resultArea.setText("Gamma(" + x + ") = " + gammaValue);
-                } catch (NumberFormatException ex) {
-                    resultArea.setText(
-                            "Invalid input. Please enter a valid number."
-                    );
+        ActionListener calculateAction = e -> {
+            String userInput = userText.getText();
+            try {
+                double x = Double.parseDouble(userInput);
+                double gammaValue = gamma(x);
+                resultArea.setText("Gamma(" + x + ") = " + gammaValue);
+            } catch (NumberFormatException ex) {
+                resultArea.setText(
+                        "Invalid input. Please enter a valid number."
+                );
 
-                } catch (IllegalArgumentException ex) {
-                    resultArea.setText(ex.getMessage());
-                }
+            } catch (IllegalArgumentException ex) {
+                resultArea.setText(ex.getMessage());
             }
         };
 
         calculateButton.addActionListener(calculateAction);
 
         userText.addKeyListener(new KeyAdapter() {
+            @Override
             public void keyPressed(final KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     calculateAction.actionPerformed(null);
@@ -313,10 +309,6 @@ public final class GammaFunctionGUI {
             }
         });
 
-        closeButton.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
-                System.exit(0);
-            }
-        });
+        closeButton.addActionListener(e -> System.exit(0));
     }
 }
