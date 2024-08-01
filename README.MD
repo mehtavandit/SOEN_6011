@@ -56,10 +56,6 @@ The GUI has been designed with accessibility in mind, including:
 
 - Java SE 8 or higher
 
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
 ## Contributing
 
 Feel free to submit issues, pull requests, or suggestions to improve the application. Please adhere to the coding style used in the project.
