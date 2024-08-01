@@ -174,6 +174,7 @@ public final class GammaFunctionGUI {
         continueButton.setBackground(WELCOME_BUTTON_COLOR);
         continueButton.setForeground(Color.WHITE);
         continueButton.setBorder(BorderFactory.createRaisedBevelBorder()); // Added border for visual effect
+        continueButton.getAccessibleContext().setAccessibleDescription("Click to proceed to the main calculator.");
         welcomePanel.add(continueButton, BorderLayout.SOUTH);
 
         welcomeFrame.add(welcomePanel);
@@ -235,6 +236,7 @@ public final class GammaFunctionGUI {
 
         JTextField userText = new JTextField(TEXT_FIELD_COLUMNS);
         userText.setFont(new Font(FONT_FAMILY, Font.PLAIN, LABEL_FONT_SIZE));
+        userText.getAccessibleContext().setAccessibleDescription("Enter a positive number to calculate its Gamma function.");
         gbc.gridx = 1;
         gbc.gridy = 0;
         panel.add(userText, gbc);
@@ -255,6 +257,7 @@ public final class GammaFunctionGUI {
         resultArea.setLineWrap(true);
         resultArea.setWrapStyleWord(true);
         JScrollPane scrollPane = new JScrollPane(resultArea);
+        resultArea.getAccessibleContext().setAccessibleDescription("Displays the result of the Gamma function calculation.");
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.gridwidth = 2;
@@ -268,6 +271,7 @@ public final class GammaFunctionGUI {
         calculateButton.setBackground(WELCOME_BUTTON_COLOR);
         calculateButton.setForeground(Color.WHITE);
         calculateButton.setBorder(BorderFactory.createRaisedBevelBorder()); // Added border for visual effect
+        calculateButton.getAccessibleContext().setAccessibleDescription("Click to calculate the Gamma function.");
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.gridwidth = 1;
@@ -281,6 +285,7 @@ public final class GammaFunctionGUI {
         closeButton.setBackground(CLOSE_BUTTON_COLOR);
         closeButton.setForeground(Color.WHITE);
         closeButton.setBorder(BorderFactory.createRaisedBevelBorder()); // Added border for visual effect
+        closeButton.getAccessibleContext().setAccessibleDescription("Click to close the application.");
         gbc.gridx = 1;
         gbc.gridy = 2;
         panel.add(closeButton, gbc);
