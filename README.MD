@@ -11,7 +11,7 @@ This is a Java Swing GUI application for calculating the Gamma function using Eu
 ## Screenshots
 
 ![Welcome Screen](screenshots/welcome.PNG)
-![Calculator Screen](screenshots/Calculation.png)
+![Calculator Screen](screenshots/Calculation.PNG)
 
 ## Installation
 
