@@ -59,14 +59,14 @@ public final class GammaFunctionGUI {
     private static final int RESULT_AREA_ROWS = 10;
 
     /**
-     * Number of columns in the result display area.
+     * Number of columns in the result display area (adjusted for better fit).
      */
-    private static final int RESULT_AREA_COLUMNS = 30;
+    private static final int RESULT_AREA_COLUMNS = 25;
 
     /**
-     * Number of columns in the text field.
+     * Number of columns in the text field (adjusted for better fit).
      */
-    private static final int TEXT_FIELD_COLUMNS = 20;
+    private static final int TEXT_FIELD_COLUMNS = 15;
 
     /**
      * Color for the welcome button background.
@@ -173,6 +173,7 @@ public final class GammaFunctionGUI {
         continueButton.setFont(new Font(FONT_FAMILY, Font.PLAIN, LABEL_FONT_SIZE));
         continueButton.setBackground(WELCOME_BUTTON_COLOR);
         continueButton.setForeground(Color.WHITE);
+        continueButton.setBorder(BorderFactory.createRaisedBevelBorder()); // Added border for visual effect
         welcomePanel.add(continueButton, BorderLayout.SOUTH);
 
         welcomeFrame.add(welcomePanel);
@@ -266,6 +267,7 @@ public final class GammaFunctionGUI {
         calculateButton.setFont(new Font(FONT_FAMILY, Font.PLAIN, LABEL_FONT_SIZE));
         calculateButton.setBackground(WELCOME_BUTTON_COLOR);
         calculateButton.setForeground(Color.WHITE);
+        calculateButton.setBorder(BorderFactory.createRaisedBevelBorder()); // Added border for visual effect
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.gridwidth = 1;
@@ -278,6 +280,7 @@ public final class GammaFunctionGUI {
         closeButton.setFont(new Font(FONT_FAMILY, Font.PLAIN, LABEL_FONT_SIZE));
         closeButton.setBackground(CLOSE_BUTTON_COLOR);
         closeButton.setForeground(Color.WHITE);
+        closeButton.setBorder(BorderFactory.createRaisedBevelBorder()); // Added border for visual effect
         gbc.gridx = 1;
         gbc.gridy = 2;
         panel.add(closeButton, gbc);
